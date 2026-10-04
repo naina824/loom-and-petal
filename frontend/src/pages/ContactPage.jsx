@@ -130,7 +130,7 @@ export default function ContactPage() {
             rel="noopener noreferrer"
             className="w-full py-2.5 px-4 rounded-xl bg-blush-500 hover:bg-blush-600 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
           >
-            <span>@{settings.instagramHandle || 'crochet_boutique_handmade'}</span>
+            <span>@{settings.instagramHandle || 'crochet.by.naina_'}</span>
           </a>
         </div>
 

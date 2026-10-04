@@ -113,8 +113,18 @@ Could you please share the design feasibility and price estimate? Thank you!`;
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 }
 
-// Generate Instagram profile or DM link
+// Generate Instagram profile link (canonical format for web and mobile apps)
 export function getInstagramLink(handle) {
-  const cleanHandle = (handle || 'crochet_boutique_handmade').replace('@', '').trim();
-  return `https://instagram.com/${cleanHandle}`;
+  const defaultHandle = 'crochet.by.naina_';
+  if (!handle) return `https://www.instagram.com/${defaultHandle}/#`;
+  let val = handle.toString().trim();
+  if (val.startsWith('http://') || val.startsWith('https://')) {
+    val = val.replace(/\/+$/, '').replace(/#+$/, '');
+    return `${val}/#`;
+  }
+  let cleanHandle = val.replace(/^@+/, '').replace(/\/+$/, '').replace(/#+$/, '').trim();
+  if (!cleanHandle || cleanHandle === 'crochet_boutique_handmade') {
+    cleanHandle = defaultHandle;
+  }
+  return `https://www.instagram.com/${cleanHandle}/#`;
 }

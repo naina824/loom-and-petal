@@ -305,7 +305,7 @@ async function seedDatabase() {
       await Settings.create({
         brandName: process.env.BRAND_NAME || 'Loom & Petal Handmade',
         whatsappNumber: process.env.WHATSAPP_NUMBER || '919209622019',
-        instagramHandle: process.env.INSTAGRAM_HANDLE || 'crochet_boutique_handmade',
+        instagramHandle: process.env.INSTAGRAM_HANDLE || 'crochet.by.naina_',
       });
       console.log('✨ Seeded default store settings.');
     }

@@ -24,7 +24,7 @@ const settingsSchema = new mongoose.Schema(
     },
     instagramHandle: {
       type: String,
-      default: 'crochet_boutique_handmade',
+      default: 'crochet.by.naina_',
     },
     contactEmail: {
       type: String,

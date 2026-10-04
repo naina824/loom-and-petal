@@ -28,7 +28,6 @@ export default function Navbar() {
 
   const whatsappUrl = `https://wa.me/${(settings.whatsappNumber || '919209622019').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hi! 🧶 I have an enquiry about your handmade crochet creations.')}`;
   const instagramUrl = getInstagramLink(settings.instagramHandle);
-
   const rawBrand = settings.brandName || 'Loom & Petal Handmade';
   const hasHandmade = /handmade/i.test(rawBrand);
   const primaryName = hasHandmade ? rawBrand.replace(/\s*handmade/i, '').trim() || 'Loom & Petal' : rawBrand;

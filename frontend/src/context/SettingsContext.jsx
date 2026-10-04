@@ -11,7 +11,7 @@ export function SettingsProvider({ children }) {
     shortIntro: 'Every loop, knot, and petal is mindfully hand-crocheted using ultra-soft milk cotton yarn to bring warm smiles that never fade.',
     whatsappNumber: '919209622019',
     whatsappDisplay: '+91 92096 22019',
-    instagramHandle: 'crochet_boutique_handmade',
+    instagramHandle: 'crochet.by.naina_',
     contactEmail: 'hello@crochetboutique.com',
     currencySymbol: '₹',
     announcementBar: '🧶 Free custom greeting card on orders above ₹899 | Pan-India & Worldwide shipping',

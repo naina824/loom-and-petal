@@ -14,8 +14,21 @@ router.get('/', async (req, res) => {
       settings = await Settings.create({
         brandName: process.env.BRAND_NAME || 'Loom & Petal Handmade',
         whatsappNumber: process.env.WHATSAPP_NUMBER || '919209622019',
-        instagramHandle: process.env.INSTAGRAM_HANDLE || 'crochet_boutique_handmade',
+        instagramHandle: process.env.INSTAGRAM_HANDLE || 'crochet.by.naina_',
       });
+    } else {
+      let changed = false;
+      if (process.env.INSTAGRAM_HANDLE && settings.instagramHandle !== process.env.INSTAGRAM_HANDLE) {
+        settings.instagramHandle = process.env.INSTAGRAM_HANDLE;
+        changed = true;
+      }
+      if (process.env.WHATSAPP_NUMBER && settings.whatsappNumber !== process.env.WHATSAPP_NUMBER) {
+        settings.whatsappNumber = process.env.WHATSAPP_NUMBER;
+        changed = true;
+      }
+      if (changed) {
+        await settings.save();
+      }
     }
     res.json(settings);
   } catch (error) {
