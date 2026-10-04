@@ -29,6 +29,11 @@ export default function Navbar() {
   const whatsappUrl = `https://wa.me/${(settings.whatsappNumber || '919209622019').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hi! 🧶 I have an enquiry about your handmade crochet creations.')}`;
   const instagramUrl = getInstagramLink(settings.instagramHandle);
 
+  const rawBrand = settings.brandName || 'Loom & Petal Handmade';
+  const hasHandmade = /handmade/i.test(rawBrand);
+  const primaryName = hasHandmade ? rawBrand.replace(/\s*handmade/i, '').trim() || 'Loom & Petal' : rawBrand;
+  const secondaryName = hasHandmade ? 'Handmade' : '';
+
   return (
     <>
       <header className="sticky top-0 z-40 bg-cream-50/95 backdrop-blur-md border-b border-cream-200/80 transition-all">
@@ -43,12 +48,13 @@ export default function Navbar() {
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-blush-200 to-cream-200 flex items-center justify-center text-lg sm:text-xl shadow-soft group-hover:scale-105 transition-transform flex-shrink-0">
                 🧶
               </div>
-              <div className="flex flex-col min-w-0">
-                <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-warmbrown-900 group-hover:text-blush-600 transition-colors truncate">
-                  {settings.brandName || 'Loom & Petal'}
+              <div className="flex flex-col min-w-0 leading-tight">
+                <span className="font-serif text-base sm:text-xl md:text-2xl font-bold tracking-tight text-warmbrown-900 group-hover:text-blush-600 transition-colors whitespace-nowrap">
+                  {primaryName}
                 </span>
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-warmbrown-500 font-medium -mt-0.5 sm:-mt-1 truncate">
-                  Handmade Crochet Studio
+                <span className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-warmbrown-500 font-medium -mt-0.5">
+                  {secondaryName || 'Handmade'}
+                  <span className="hidden md:inline"> Crochet Studio</span>
                 </span>
               </div>
             </Link>
@@ -73,35 +79,35 @@ export default function Navbar() {
 
             {/* Right Action Icons */}
             <div className="flex items-center space-x-1 sm:space-x-2.5 flex-shrink-0">
-              {/* Instagram Link */}
+              {/* Instagram Link (Desktop / Tablet) */}
               <a
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram profile"
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full text-warmbrown-600 hover:text-blush-600 hover:bg-cream-200 flex items-center justify-center transition-colors"
+                className="hidden md:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full text-warmbrown-600 hover:text-blush-600 hover:bg-cream-200 items-center justify-center transition-colors"
                 title="Visit Instagram"
               >
                 <InstagramIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
 
-              {/* WhatsApp Link */}
+              {/* WhatsApp Link (Desktop / Tablet) */}
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat on WhatsApp"
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full text-warmbrown-600 hover:text-emerald-600 hover:bg-cream-200 flex items-center justify-center transition-colors"
+                className="hidden md:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full text-warmbrown-600 hover:text-emerald-600 hover:bg-cream-200 items-center justify-center transition-colors"
                 title="Chat on WhatsApp"
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
 
-              {/* Cart / Bag Button */}
+              {/* Cart / Bag Button (Desktop / Tablet) */}
               <button
                 onClick={() => setIsOpen(true)}
                 aria-label="Shopping Bag"
-                className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-cream-200/80 hover:bg-blush-100 text-warmbrown-800 flex items-center justify-center transition-colors"
+                className="hidden md:flex relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-cream-200/80 hover:bg-blush-100 text-warmbrown-800 items-center justify-center transition-colors"
                 title="View Shopping Bag"
               >
                 <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-warmbrown-700" />
@@ -115,10 +121,13 @@ export default function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden w-9 h-9 rounded-xl text-warmbrown-700 hover:bg-cream-200 flex items-center justify-center focus:outline-none"
+                className="relative md:hidden w-10 h-10 rounded-xl text-warmbrown-700 hover:bg-cream-200 flex items-center justify-center focus:outline-none transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {totalCount > 0 && !mobileMenuOpen && (
+                  <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-blush-500 rounded-full ring-2 ring-cream-50" />
+                )}
               </button>
             </div>
           </div>
@@ -127,6 +136,28 @@ export default function Navbar() {
         {/* Mobile Drawer Menu with Backdrop */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-cream-50 border-b border-cream-200 px-4 pt-3 pb-6 space-y-3 animate-drawer-down shadow-soft-lg">
+            {/* Shopping Bag Quick Action in Mobile Menu */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setIsOpen(true);
+              }}
+              className="w-full px-4 py-3 rounded-xl text-sm font-semibold transition-colors flex items-center justify-between bg-cream-100 border border-cream-200 text-warmbrown-900 hover:bg-cream-200 active:bg-cream-300"
+            >
+              <div className="flex items-center gap-2.5">
+                <ShoppingBag className="w-4 h-4 text-warmbrown-700" />
+                <span>Shopping Bag</span>
+              </div>
+              {totalCount > 0 ? (
+                <span className="bg-blush-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+                  {totalCount} {totalCount === 1 ? 'item' : 'items'}
+                </span>
+              ) : (
+                <span className="text-xs text-warmbrown-500">0 items</span>
+              )}
+            </button>
+
+            {/* Navigation Links */}
             <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <NavLink
@@ -146,6 +177,7 @@ export default function Navbar() {
               ))}
             </div>
 
+            {/* Social & Contact Actions */}
             <div className="pt-3 border-t border-cream-200 flex items-center justify-around gap-2">
               <a
                 href={instagramUrl}
