@@ -121,14 +121,14 @@ export default function CustomOrdersPage() {
         </p>
 
         {/* Quick Contact Buttons Row */}
-        <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+        <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
           <a
             href={whatsappDirectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-soft hover:shadow-soft-lg transition-all"
+            className="w-full sm:w-auto px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-soft hover:shadow-soft-lg transition-all"
           >
-            <MessageCircle className="w-4 h-4" />
+            <MessageCircle className="w-4 h-4 flex-shrink-0" />
             <span>Chat Custom Order on WhatsApp</span>
           </a>
 
@@ -136,9 +136,9 @@ export default function CustomOrdersPage() {
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-full bg-white text-warmbrown-800 border border-cream-300 hover:bg-cream-100 font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors"
+            className="w-full sm:w-auto px-6 py-3 rounded-full bg-white text-warmbrown-800 border border-cream-300 hover:bg-cream-100 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors"
           >
-            <InstagramIcon className="w-4 h-4 text-blush-500" />
+            <InstagramIcon className="w-4 h-4 text-blush-500 flex-shrink-0" />
             <span>DM on Instagram</span>
           </a>
         </div>

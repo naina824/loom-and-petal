@@ -153,15 +153,15 @@ export default function ShopPage() {
         </div>
 
         {/* Category Pills Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 no-scrollbar scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => handleCategoryChange(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
                 selectedCategory === cat
-                  ? 'bg-warmbrown-900 text-cream-50 shadow-sm'
-                  : 'bg-cream-100/90 text-warmbrown-700 hover:bg-cream-200'
+                  ? 'bg-warmbrown-900 text-cream-50 shadow-xs'
+                  : 'bg-cream-100/90 text-warmbrown-700 hover:bg-cream-200 active:bg-cream-300'
               }`}
             >
               {cat === 'All' ? 'All Collections' : cat}
@@ -189,15 +189,15 @@ export default function ShopPage() {
         )}
       </div>
 
-      {/* Products Grid */}
+      {/* Products Grid - 2 cols on mobile, 3 cols on tablet, 4 cols on desktop */}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div key={i} className="bg-white rounded-3xl p-4 border border-cream-200 animate-pulse h-80" />
+            <div key={i} className="bg-white rounded-3xl p-4 border border-cream-200 animate-pulse h-72 sm:h-80" />
           ))}
         </div>
       ) : products.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}

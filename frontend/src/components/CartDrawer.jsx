@@ -25,8 +25,8 @@ export default function CartDrawer() {
         onClick={() => setIsOpen(false)}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-cream-50 shadow-soft-xl flex flex-col">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+        <div className="w-screen max-w-full sm:max-w-md bg-cream-50 shadow-soft-xl flex flex-col h-full">
           {/* Header */}
           <div className="p-5 border-b border-cream-200 flex items-center justify-between bg-white">
             <div className="flex items-center gap-2.5">
@@ -96,20 +96,20 @@ export default function CartDrawer() {
                       <div className="flex items-center gap-1.5 border border-cream-200 rounded-lg p-0.5 bg-cream-50">
                         <button
                           onClick={() => updateQuantity(item._id, item.selectedColor, -1)}
-                          className="p-1 text-warmbrown-600 hover:bg-white rounded transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-warmbrown-700 hover:bg-white active:bg-cream-200 rounded transition-colors"
                           aria-label="Decrease quantity"
                         >
-                          <Minus className="w-3 h-3" />
+                          <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="text-xs font-semibold px-1.5 text-warmbrown-800">
+                        <span className="text-xs font-semibold px-2 text-warmbrown-800">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item._id, item.selectedColor, 1)}
-                          className="p-1 text-warmbrown-600 hover:bg-white rounded transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-warmbrown-700 hover:bg-white active:bg-cream-200 rounded transition-colors"
                           aria-label="Increase quantity"
                         >
-                          <Plus className="w-3 h-3" />
+                          <Plus className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
@@ -125,7 +125,7 @@ export default function CartDrawer() {
 
           {/* Footer / WhatsApp Checkout */}
           {items.length > 0 && (
-            <div className="p-5 bg-white border-t border-cream-200 space-y-4">
+            <div className="p-4 sm:p-5 bg-white border-t border-cream-200 space-y-3.5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between text-warmbrown-600 text-xs">
                   <span>Subtotal</span>

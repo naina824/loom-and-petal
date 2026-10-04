@@ -112,7 +112,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-12 sm:space-y-16 pb-24 sm:pb-16">
       {/* Back button */}
       <div>
         <Link
@@ -337,13 +337,34 @@ export default function ProductDetailPage() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {relatedProducts.map((p) => (
               <ProductCard key={p._id} product={p} />
             ))}
           </div>
         </div>
       )}
+
+      {/* Mobile Sticky Order & Bag Bar */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-cream-200 px-3 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] shadow-soft-xl flex items-center gap-2">
+        <button
+          onClick={() => addToCart(product, quantity, selectedColor)}
+          className="flex-1 py-3 px-3 rounded-xl bg-cream-200 active:bg-cream-300 text-warmbrown-900 font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors"
+        >
+          <ShoppingBag className="w-4 h-4" />
+          <span>Add to Bag</span>
+        </button>
+
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 py-3 px-3 rounded-xl bg-emerald-600 active:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span>Order {formatPrice(product.price)}</span>
+        </a>
+      </div>
     </div>
   );
 }

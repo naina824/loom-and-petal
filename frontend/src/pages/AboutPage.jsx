@@ -1,5 +1,5 @@
 import React from 'react';
-import nainaweb from '../assets/nainaweb.png';
+import web1 from '../assets/web1.png';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
 import { Sparkles, Heart, Feather, ShieldCheck, ArrowRight, Camera } from 'lucide-react';
@@ -26,9 +26,9 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         {/* Maker Photo / Portrait Space (User can later replace photo) */}
         <div className="lg:col-span-5 relative">
-          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] bg-cream-200 border-4 border-white shadow-soft-lg group">
+          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:max-w-none bg-cream-200 border-4 border-white shadow-soft-lg group">
             <img
-              src={nainaweb}
+              src={web1}
               alt="Artisan Maker"
               className="w-full h-full object-cover"
             />

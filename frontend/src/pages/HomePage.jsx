@@ -7,7 +7,6 @@ import InstagramIcon from '../components/InstagramIcon';
 import insta from '../assets/insta.png';
 import web1 from '../assets/web1.png';
 import web2 from '../assets/web2.png';
-import web3 from '../assets/web3.png';
 import web4 from '../assets/web4.png';
 import flowers from '../assets/flowers.png';
 import bow from '../assets/bow.png';
@@ -39,12 +38,6 @@ const heroSlides = [
     tag: 'Artisan Floral Bouquet',
     title: 'Everlasting Stitched Blooms',
     desc: 'Timeless floral charm that brightens every corner',
-  },
-  {
-    image: web3,
-    tag: 'Cozy Handmade Keepsake',
-    title: 'Warm Crochet Artistry',
-    desc: 'Delicate textures and aesthetic soothing hues',
   },
   {
     image: web4,
@@ -206,7 +199,7 @@ export default function HomePage() {
                 <span>Handmade with Love &amp; Care</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-warmbrown-900 tracking-tight leading-[1.15]">
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-warmbrown-900 tracking-tight leading-[1.15]">
                 Everlasting blooms &amp; cozy stitches,{' '}
                 <span className="italic font-normal text-blush-600 block sm:inline">
                   made specially for you.
@@ -238,7 +231,7 @@ export default function HomePage() {
               </div>
 
               {/* Trust Micro-Badges */}
-              <div className="pt-6 border-t border-cream-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-warmbrown-600">
+              <div className="pt-6 border-t border-cream-200/90 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-warmbrown-600">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   <span>100% Handcrafted</span>
@@ -257,8 +250,8 @@ export default function HomePage() {
             {/* Right Visual Composition */}
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Main Hero Card with 4 Auto-Rotating Images */}
-                <div className="relative rounded-3xl overflow-hidden shadow-soft-xl border-4 border-white aspect-[4/5] bg-cream-200">
+                {/* Main Hero Card with Auto-Rotating Images */}
+                <div className="relative rounded-3xl overflow-hidden shadow-soft-xl border-4 border-white aspect-[4/5] max-w-[320px] sm:max-w-md mx-auto lg:max-w-none bg-cream-200">
                   {heroSlides.map((slide, idx) => (
                     <img
                       key={idx}
@@ -270,17 +263,17 @@ export default function HomePage() {
                     />
                   ))}
 
-                  {/* Clean Minimalist Dots Indicator */}
-                  <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-1.5 z-10">
+                  {/* Clean Minimalist Dots Indicator with generous tap zones */}
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-2 z-10 py-1">
                     {heroSlides.map((_, dotIdx) => (
                       <button
                         key={dotIdx}
                         type="button"
                         onClick={() => setCurrentHeroIndex(dotIdx)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                        className={`h-2 rounded-full transition-all duration-300 p-1.5 -m-1 ${
                           currentHeroIndex === dotIdx
-                            ? 'w-6 bg-white shadow-xs'
-                            : 'w-1.5 bg-white/60 hover:bg-white'
+                            ? 'w-7 bg-white shadow-xs'
+                            : 'w-2 bg-white/70 hover:bg-white'
                         }`}
                         aria-label={`Show slide ${dotIdx + 1}`}
                       />
@@ -307,7 +300,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-6">
           {categories.map((cat) => (
             <Link
               key={cat.category}
@@ -354,13 +347,13 @@ export default function HomePage() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="bg-white rounded-3xl p-4 border border-cream-200 animate-pulse h-96" />
+              <div key={n} className="bg-white rounded-3xl p-4 border border-cream-200 animate-pulse h-80 sm:h-96" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
@@ -508,12 +501,12 @@ export default function HomePage() {
 
       {/* 7. INSTAGRAM SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 text-center sm:text-left">
           <div>
             <span className="text-xs uppercase tracking-widest text-blush-600 font-bold">
               Follow Our Journey
             </span>
-            <h2 className="font-serif text-3xl font-bold text-warmbrown-900 mt-1">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-warmbrown-900 mt-1">
               Join Our Instagram Community
             </h2>
             <p className="text-sm text-warmbrown-600">
@@ -524,7 +517,7 @@ export default function HomePage() {
             href={getInstagramLink(settings.instagramHandle || 'crochet.by.naina_')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blush-500 text-white font-semibold text-xs hover:bg-blush-600 transition-colors shadow-soft"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-blush-500 text-white font-semibold text-xs sm:text-sm hover:bg-blush-600 transition-colors shadow-soft w-full sm:w-auto"
           >
             <InstagramIcon className="w-4 h-4" />
             <span>Follow on Instagram</span>
