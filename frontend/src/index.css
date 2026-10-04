@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FAF7F0;
+    color: #402E22;
+  }
+
+  ::selection {
+    background-color: #F5DCE0;
+    color: #573F2E;
+  }
+}
+
+/* Custom Soft Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E4D8CE;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CEB9A7;
+}
+
+/* Subtle crochet pattern texture */
+.crochet-pattern-bg {
+  background-color: #FAF7F0;
+  background-image: radial-gradient(#EBDDCB 0.85px, transparent 0.85px), radial-gradient(#EBDDCB 0.85px, #FAF7F0 0.85px);
+  background-size: 34px 34px;
+  background-position: 0 0, 17px 17px;
+}
+
+/* Subtle badge pulse */
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.animate-gentle {
+  animation: gentle-pulse 3s infinite ease-in-out;
+}

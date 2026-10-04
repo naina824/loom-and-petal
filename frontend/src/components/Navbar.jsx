@@ -1,0 +1,171 @@
+import React, { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useSettings } from '../context/SettingsContext';
+import { useCart } from '../context/CartContext';
+import { getInstagramLink } from '../utils/api';
+import InstagramIcon from './InstagramIcon';
+import {
+  ShoppingBag,
+  Menu,
+  X,
+  MessageCircle,
+  Sparkles,
+} from 'lucide-react';
+
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { settings } = useSettings();
+  const { totalCount, setIsOpen } = useCart();
+  const location = useLocation();
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'Custom Orders', path: '/custom-orders' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  const whatsappUrl = `https://wa.me/${(settings.whatsappNumber || '919209622019').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hi! 🧶 I have an enquiry about your handmade crochet creations.')}`;
+  const instagramUrl = getInstagramLink(settings.instagramHandle);
+
+  return (
+    <header className="sticky top-0 z-40 bg-cream-50/90 backdrop-blur-md border-b border-cream-200/80 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo / Brand Name */}
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 group focus:outline-none"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blush-200 to-cream-200 flex items-center justify-center text-xl shadow-soft group-hover:scale-105 transition-transform">
+              🧶
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif text-2xl font-bold tracking-tight text-warmbrown-900 group-hover:text-blush-600 transition-colors">
+                {settings.brandName || 'Loom & Petal'}
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-warmbrown-500 font-medium -mt-1">
+                Handmade Crochet Studio
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `px-3.5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${isActive
+                    ? 'bg-warmbrown-100 text-warmbrown-900 font-semibold shadow-sm'
+                    : 'text-warmbrown-600 hover:text-warmbrown-900 hover:bg-cream-200/60'
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Right Action Icons */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* Instagram Link */}
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram profile"
+              className="p-2.5 rounded-full text-warmbrown-600 hover:text-blush-600 hover:bg-cream-200 transition-colors"
+              title="Visit Instagram"
+            >
+              <InstagramIcon className="w-5 h-5" />
+            </a>
+
+            {/* WhatsApp Link */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat on WhatsApp"
+              className="p-2.5 rounded-full text-warmbrown-600 hover:text-emerald-600 hover:bg-cream-200 transition-colors"
+              title="Chat on WhatsApp"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </a>
+
+            {/* Cart / Bag Button */}
+            <button
+              onClick={() => setIsOpen(true)}
+              aria-label="Shopping Bag"
+              className="relative p-2.5 rounded-full bg-cream-200/80 hover:bg-blush-100 text-warmbrown-800 transition-colors"
+              title="View Shopping Bag"
+            >
+              <ShoppingBag className="w-5 h-5 text-warmbrown-700" />
+              {totalCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blush-500 text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm animate-gentle">
+                  {totalCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-warmbrown-700 hover:bg-cream-200 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-cream-50 border-b border-cream-200 px-4 pt-3 pb-6 space-y-3 animate-fadeIn">
+          <div className="flex flex-col space-y-1">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `px-4 py-2.5 rounded-xl text-base font-medium transition-colors ${isActive
+                    ? 'bg-warmbrown-100 text-warmbrown-900 font-semibold'
+                    : 'text-warmbrown-700 hover:bg-cream-200'
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
+
+          <div className="pt-3 border-t border-cream-200 flex items-center justify-around">
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-warmbrown-700 font-medium py-2 px-3 rounded-lg hover:bg-cream-200"
+            >
+              <InstagramIcon className="w-4 h-4 text-blush-500" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-warmbrown-700 font-medium py-2 px-3 rounded-lg hover:bg-cream-200"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-600" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
