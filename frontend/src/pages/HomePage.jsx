@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
-import { apiRequest, getInstagramLink } from '../utils/api';
+import { apiRequest, getInstagramLink, handleInstagramClick } from '../utils/api';
 import ProductCard from '../components/ProductCard';
 import InstagramIcon from '../components/InstagramIcon';
 import insta from '../assets/insta.png';
@@ -517,6 +517,7 @@ export default function HomePage() {
             href={getInstagramLink(settings.instagramHandle || 'crochet.by.naina_')}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
             className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-blush-500 text-white font-semibold text-xs sm:text-sm hover:bg-blush-600 transition-colors shadow-soft w-full sm:w-auto"
           >
             <InstagramIcon className="w-4 h-4" />
@@ -529,6 +530,7 @@ export default function HomePage() {
             href={getInstagramLink(settings.instagramHandle || 'crochet.by.naina_')}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
             className="group relative rounded-3xl overflow-hidden border border-cream-200 shadow-soft-lg block max-w-xs sm:max-w-sm transition-transform duration-300 hover:scale-[1.02]"
           >
             <img

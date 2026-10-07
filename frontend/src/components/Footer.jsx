@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
-import { getInstagramLink } from '../utils/api';
+import { getInstagramLink, handleInstagramClick } from '../utils/api';
 import InstagramIcon from './InstagramIcon';
 import {
   Heart,
@@ -39,6 +39,7 @@ export default function Footer() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full bg-warmbrown-800 hover:bg-blush-500 hover:text-white flex items-center justify-center transition-colors text-cream-200"
               >

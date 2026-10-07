@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSettings } from '../context/SettingsContext';
-import { apiRequest, getWhatsAppCustomOrderLink, getInstagramLink } from '../utils/api';
+import { apiRequest, getWhatsAppCustomOrderLink, getInstagramLink, handleInstagramClick } from '../utils/api';
 import InstagramIcon from '../components/InstagramIcon';
 import {
   Palette,
@@ -136,6 +136,7 @@ export default function CustomOrdersPage() {
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
             className="w-full sm:w-auto px-6 py-3 rounded-full bg-white text-warmbrown-800 border border-cream-300 hover:bg-cream-100 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors"
           >
             <InstagramIcon className="w-4 h-4 text-blush-500 flex-shrink-0" />

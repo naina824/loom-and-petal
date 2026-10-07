@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
 import { useCart } from '../context/CartContext';
-import { getInstagramLink } from '../utils/api';
+import { getInstagramLink, handleInstagramClick } from '../utils/api';
 import InstagramIcon from './InstagramIcon';
 import {
   ShoppingBag,
@@ -83,6 +83,7 @@ export default function Navbar() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
                 aria-label="Instagram profile"
                 className="hidden md:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full text-warmbrown-600 hover:text-blush-600 hover:bg-cream-200 items-center justify-center transition-colors"
                 title="Visit Instagram"
@@ -182,6 +183,7 @@ export default function Navbar() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
                 className="flex-1 flex items-center justify-center gap-2 text-xs text-warmbrown-800 font-semibold py-2.5 px-3 rounded-xl bg-white border border-cream-200 shadow-xs hover:bg-cream-100"
               >
                 <InstagramIcon className="w-4 h-4 text-blush-500" />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
 import { useCart } from '../context/CartContext';
-import { apiRequest, getWhatsAppOrderLink, getInstagramLink } from '../utils/api';
+import { apiRequest, getWhatsAppOrderLink, getInstagramLink, handleInstagramClick } from '../utils/api';
 import ProductCard from '../components/ProductCard';
 import InstagramIcon from '../components/InstagramIcon';
 import {
@@ -289,6 +289,7 @@ export default function ProductDetailPage() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => handleInstagramClick(e, settings.instagramHandle)}
                 className="w-full py-3 px-4 rounded-2xl bg-blush-100 hover:bg-blush-200 text-blush-900 border border-blush-300 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors"
               >
                 <InstagramIcon className="w-4 h-4 text-blush-600" />

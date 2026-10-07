@@ -113,18 +113,65 @@ Could you please share the design feasibility and price estimate? Thank you!`;
   return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 }
 
-// Generate Instagram profile link (canonical format for web and mobile apps)
+// Generate canonical Instagram profile link (clean format for web and mobile apps)
 export function getInstagramLink(handle) {
   const defaultHandle = 'crochet.by.naina_';
-  if (!handle) return `https://www.instagram.com/${defaultHandle}/#`;
-  let val = handle.toString().trim();
-  if (val.startsWith('http://') || val.startsWith('https://')) {
-    val = val.replace(/\/+$/, '').replace(/#+$/, '');
-    return `${val}/#`;
-  }
-  let cleanHandle = val.replace(/^@+/, '').replace(/\/+$/, '').replace(/#+$/, '').trim();
+  let val = (handle || defaultHandle).toString().trim();
+  let cleanHandle = val
+    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, '')
+    .replace(/^@+/, '')
+    .replace(/\/+$/, '')
+    .replace(/#+$/, '')
+    .trim();
+
   if (!cleanHandle || cleanHandle === 'crochet_boutique_handmade') {
     cleanHandle = defaultHandle;
   }
-  return `https://www.instagram.com/${cleanHandle}/#`;
+  return `https://www.instagram.com/${cleanHandle}/`;
+}
+
+// Smart click handler: on mobile devices (Android/iOS), opens directly in the native Instagram App.
+// If the app is not installed, gracefully opens the profile in mobile browser.
+// On desktop, allows normal target="_blank" new-tab behavior.
+export function handleInstagramClick(e, handle) {
+  const defaultHandle = 'crochet.by.naina_';
+  let val = (handle || defaultHandle).toString().trim();
+  let cleanHandle = val
+    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, '')
+    .replace(/^@+/, '')
+    .replace(/\/+$/, '')
+    .replace(/#+$/, '')
+    .trim();
+
+  if (!cleanHandle || cleanHandle === 'crochet_boutique_handmade') {
+    cleanHandle = defaultHandle;
+  }
+
+  const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+  if (!isMobile) {
+    // Desktop: normal link click opens in new tab
+    return;
+  }
+
+  // Prevent blank tab issue on mobile browsers
+  if (e && e.preventDefault) {
+    e.preventDefault();
+  }
+
+  const isAndroid = /Android/i.test(navigator.userAgent || '');
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+  const webUrl = `https://www.instagram.com/${cleanHandle}/`;
+
+  if (isAndroid) {
+    // Android Chrome intent launches Instagram app directly if installed, falls back to web
+    window.location.href = `intent://instagram.com/_u/${cleanHandle}/#Intent;package=com.instagram.android;scheme=https;end`;
+  } else if (isIOS) {
+    // iOS deep link to Instagram native app with web fallback
+    window.location.href = `instagram://user?username=${cleanHandle}`;
+    setTimeout(() => {
+      window.location.href = webUrl;
+    }, 1200);
+  } else {
+    window.location.href = webUrl;
+  }
 }
